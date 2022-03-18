@@ -11,13 +11,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Osu osu = new Osu(Path.of("C:\\Users\\Nexus\\Desktop\\Osu"));
-        new Thread(()-> {
+        Thread t = new Thread(()-> {
             try {
                 osu.Copy(Path.of("C:\\Users\\Nexus\\Music\\New folder"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
+        });
+        t.setDaemon(true);
+        t.start();
         Scanner in = new Scanner(System.in);
         System.out.print("Input: ");
         String str = in.nextLine();
