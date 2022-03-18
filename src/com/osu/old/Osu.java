@@ -1,4 +1,4 @@
-package com.osu;
+package com.osu.old;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +13,7 @@ public class Osu {
 	Musics musics;
 	File osuPath;
 
+	@Deprecated
 	public Osu(Path osu) throws IOException {
 		osuPath = osu.toFile();
 		if (osuPath.exists()) {

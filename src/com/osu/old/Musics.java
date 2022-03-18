@@ -1,4 +1,4 @@
-package com.osu;
+package com.osu.old;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
+@SuppressWarnings("All")
 public class Musics {
 	File folder;
 
