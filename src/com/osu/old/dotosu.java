@@ -66,7 +66,7 @@ public class dotosu {
 	}
 
 	static public enum Sections {
-		General("[General]"), Editor("[Editor]"), Metadata("[Metadata]"), Difficulty("[Difficulty]"),
+		General("[OGeneral]"), Editor("[OEditor]"), Metadata("[Metadata]"), Difficulty("[Difficulty]"),
 		Events("[Events]"), TimingPoints("[TimingPoints]");
 
 		String key;

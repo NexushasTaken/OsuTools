@@ -7,11 +7,16 @@ import java.io.BufferedReader;
 import java.util.HashMap;
 
 public final class OsuFile {
-    private String version;
-    private HashMap<Sections, HashMap<String, String>> struct;
+    public final String title;
+    public final String audio;
+    public String version;
+    public File file;
+    public HashMap<String, HashMap<String, String>> struct;
+    //             Section         Option  Value
 
-    // General-Difficulty
+    // OGeneral-Difficulty
     public OsuFile(File path) throws IOException {
+        this.file = path;
         BufferedReader read = new BufferedReader(new FileReader(path));
         struct = new HashMap<>();
         String line = read.readLine();
@@ -19,41 +24,29 @@ public final class OsuFile {
             getVersion(line);
         while (read.ready()) {
             line = read.readLine();
-            if(line.isBlank() || line.isEmpty())
-                continue;
-//            else if (line.startsWith(Sections.General.key))
-//                put(read, Sections.General);
-//            else if (line.startsWith(Sections.Editor.key))
-//                put(read, Sections.Editor);
-//            else if (line.startsWith(Sections.Metadata.key))
-//                put(read, Sections.Metadata);
-//            else if (line.startsWith(Sections.Difficulty.key))
-//                put(read, Sections.Difficulty);
-//            else if (line.startsWith(Sections.Events.key))
-//                break;
-
-            // Temporary Code
-            for (Sections sec : Sections.values()) {
-                if(isSectionKV(sec))
-                    put(read, sec);
-                else if(sec.equals(Sections.Events))
-                    break;
-            }
-
+            if (line.startsWith(Sections.General))
+                put(read, Sections.General);
+            else if (line.startsWith(Sections.Editor))
+                put(read, Sections.Editor);
+            else if (line.startsWith(Sections.Metadata))
+                put(read, Sections.Metadata);
+            else if (line.startsWith(Sections.Difficulty))
+                put(read, Sections.Difficulty);
+            else if (line.startsWith(Sections.Events))
+                break;
         }
+        this.title = this.struct.get(Sections.Metadata).get(OMetaData.Title);
+        this.audio = this.struct.get(Sections.General).get(OGeneral.AudioFilename);
     }
 
-    private boolean isSectionKV(Sections sec) {
-        return sec.equals(Sections.General) ||
-                sec.equals(Sections.Editor) ||
-                sec.equals(Sections.Metadata) ||
-                sec.equals(Sections.Difficulty);
+    private String get(String section) {
+        return null;
     }
 
-    private void put(BufferedReader read, Sections section) throws IOException {
+    private void put(BufferedReader read, String section) throws IOException {
         HashMap<String, String> options = new HashMap<>();
-        String temp = read.readLine();
-        while (!temp.isBlank()) {
+        String temp;
+        while (!(temp = read.readLine()).isEmpty()) {
             String[] kv = null;
             {
                 String[] tempKV = temp.split(":");
