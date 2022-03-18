@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-@SuppressWarnings("ConstantConditions")
 public class Osu implements OsuUtils {
     public Path path;
     public OsuBeatmaps beatmaps;
@@ -15,7 +14,6 @@ public class Osu implements OsuUtils {
     public Osu(Path path) throws IOException {
         this.path = path;
         this.beatmaps = new OsuBeatmaps(path.resolve("Songs").toFile());
-
     }
 
     @Override
