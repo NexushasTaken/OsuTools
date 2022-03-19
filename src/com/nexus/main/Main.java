@@ -1,8 +1,6 @@
 package com.nexus.main;
 
 import com.nexus.osu.*;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
